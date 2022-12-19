@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8">
+    <!-- Contacts table -->
+    <table mat-table [dataSource]="listaPresupuesto" [ngStyle]="{ 'margin-top': '30px' }">
+        <!-- FirstName column -->
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
+            <mat-cell *matCellDef="let pre">
+                {{ pre.nombre | titlecase }}
+            </mat-cell>
+        </ng-container>
+
+        <!-- LastName column -->
+        <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
+            <mat-cell *matCellDef="let pre">
+                {{ pre.monto | titlecase }}
+            </mat-cell>
+        </ng-container>
+
+        
+    <!-- Buttons column -->
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Action Buttons</mat-header-cell>
+        <mat-cell *matCellDef="let contact">
+          <button
+            mat-flat-button
+            color="accent" 
+          >
+            Edit
+          </button>
+
+          <button mat-fab extended>
+            Home
+          </button>
+          &nbsp;
+          <button mat-flat-button color="warn" >
+            Delete
+          </button>
+        </mat-cell>
+      </ng-container>
+
+        <!-- Table settings -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table> 
+</div>
