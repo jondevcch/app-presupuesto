@@ -32,7 +32,9 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
   }
 
   get_listPresupuestos() {
-    this.listaPresupuesto = this.presupuestoService.get_listPresupuestos();
+    this.presupuestoService.get_listPresupuestos().subscribe((presupuestos)=> {
+      this.listaPresupuesto = presupuestos;
+    });
   }
 
   // search_contact(id: string) {
