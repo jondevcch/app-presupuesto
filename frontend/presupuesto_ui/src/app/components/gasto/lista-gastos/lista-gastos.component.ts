@@ -12,12 +12,16 @@ import { GastoService } from 'src/app/services/gasto-service.service';
   styleUrls: ['./lista-gastos.component.css']
 })
 export class ListaGastosComponent implements AfterViewInit, OnInit {
-
+ 
   dataSource!: MatTableDataSource<Gasto>;
   listaGastos!: Gasto[];
   displayedColumns: string[] = ['nombreGasto', 'monto', 'id'];
   editionMode = false;
 
+  montoPresupuesto: number = 0;
+  totalGastos: number = 0;
+  Balance: number = 0;
+  
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
@@ -33,6 +37,9 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   get_listGastos() {
-    this.listaGastos= this.gastoService.get_listGastos();
+    this.montoPresupuesto = 50000;
+    this.listaGastos = this.gastoService.get_listGastos();
+    this.listaGastos.forEach(element => { this.totalGastos += element.monto; });
+    this.Balance = this.montoPresupuesto - this.totalGastos;
   }
 }
