@@ -5,9 +5,9 @@
 </p>
 
 <div class="mat-elevation-z8">
-    <!-- Contacts table -->
-    <table mat-table [dataSource]="listaGastos" [ngStyle]="{ 'margin-top': '30px' }">
-        <!-- FirstName column -->
+
+    <table mat-table [dataSource]="dataSource" [ngStyle]="{ 'margin-top': '30px' }">
+
         <ng-container matColumnDef="nombreGasto">
             <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
             <mat-cell *matCellDef="let pre">
@@ -15,7 +15,6 @@
             </mat-cell>
         </ng-container>
 
-        <!-- LastName column -->
         <ng-container matColumnDef="monto">
             <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
             <mat-cell *matCellDef="let pre">
@@ -23,23 +22,40 @@
             </mat-cell>
         </ng-container>
 
-
-        <!-- Buttons column -->
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>Action Buttons</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let contact">
-                < Edit button>
-                    <button mat-fab extended>
-                        Home
-                    </button> &nbsp;
-                    <button mat-flat-button color="warn">
-                        Delete
-                    </button>
+                <button mat-flat-button color="accent">
+                    Editar
+                </button> &nbsp;
+                <button mat-flat-button color="warn">
+                    Borrar
+                </button>
             </mat-cell>
         </ng-container>
 
-        <!-- Table settings -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="card-wrapper" style="text-align: center;">
+
+    <mat-card class="example-card" style="text-align: center;">
+        <mat-card-content>
+            <mat-grid-list class="labelDescription" cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Balance:&nbsp;{{Balance | currency}}</p>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
+
 </div>
