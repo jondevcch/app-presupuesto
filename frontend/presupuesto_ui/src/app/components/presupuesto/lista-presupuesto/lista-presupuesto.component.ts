@@ -20,7 +20,13 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editPresupuestoForm') editForm!: NgForm;
 
-  constructor(private presupuestoService: PresupuestoService) { }
+  presupuesto!: Presupuesto;
+
+  presupuestoEdit !: Presupuesto;
+
+  @ViewChild('presupuestoForm') presupuestoForm!: NgForm;
+
+  constructor(private presupuestoServices: PresupuestoService) { }
 
   ngOnInit(): void {
     this.get_listPresupuestos();
@@ -32,22 +38,23 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
   }
 
   get_listPresupuestos() {
-    this.presupuestoService.get_listPresupuestos().subscribe((presupuestos)=> {
+    this.presupuestoServices.get_listPresupuestos().subscribe((presupuestos)=> {
       this.listaPresupuesto = presupuestos;
     });
   }
 
-  // search_contact(id: string) {
-  //   this.edit_id = id;
-  //   this.presupuestoService.get_Presupuesto(id).subscribe((contact) => {
-    
-  //     this.editForm.setValue({
-  //       first_name: contact.first_name,
-  //       last_name: contact.last_name,
-  //       email: contact.email,
-  //       _id: contact._id,
-  //     });
+  mostrarMantenimiento(mostrar = false){
+    this.editionMode = mostrar;
+  }
 
-  //   });
-  // }
+  cargarPresupuesto(id: String){
+    this.mostrarMantenimiento(false);
+    if(id !== '')
+    {
+       this.presupuestoServices.get_Presupuesto(id).subscribe((pre)=> {
+          this.presupuestoEdit = pre;
+          this.mostrarMantenimiento(true);
+       });
+    }
+  }
 }

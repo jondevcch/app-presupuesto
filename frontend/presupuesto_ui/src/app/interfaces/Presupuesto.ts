@@ -1,7 +1,8 @@
-export interface Presupuesto {
-    id: number;
+export interface Presupuesto {    
+    _id: string;
     nombre: string;
-    idCaterogia: number;
+    categoria?: number;
+    divisa?: string;
     idUsuario: string;
     monto: number;
     gastosTotales?: number;

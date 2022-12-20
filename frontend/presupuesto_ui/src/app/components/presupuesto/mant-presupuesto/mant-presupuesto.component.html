@@ -1,1 +1,50 @@
-<p>mant-presupuesto works!</p>
+<p>
+    <mat-toolbar>
+        <h3 [ngStyle]="{ 'color': '#69f0ae'}">Mantenimiento de presupuesto</h3>
+    </mat-toolbar>
+</p>
+<div>
+    <form class="form-container" (ngSubmit)="mantenimiento(); 
+    presupuestoForm.resetForm()" #presupuestoForm="ngForm" [ngStyle]="{ 'margin-left': '11px' }">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre presupuesto</mat-label>
+            <input matInput ngModel #Nombre="ngModel" name="nombre" [ngModel]="presupuesto.nombre" placeholder="Nombre del presupuesto" required />
+            <mat-error *ngIf="!Nombre.valid && Nombre.touched">
+                El nombre es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Monto presupuesto</mat-label>
+            <input matInput ngModel #Monto="ngModel" name="monto" [ngModel]="presupuesto.monto" placeholder="Monto del presupuesto" required />
+            <mat-error *ngIf="!Monto.valid && Monto.touched">
+                El monto es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Divisa</mat-label>
+            <select matNativeControl ngModel #Divisa="ngModel" [ngModel]="presupuesto.divisa" name="divisa">
+              <option value="CRC">Colones</option>
+              <option value="USD">Dolares</option>
+              <option value="EUR">Euros</option>
+            </select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <select matNativeControl ngModel #Divisa="ngModel" name="categoria" [ngModel]="presupuesto.categoria">
+              <option value=1>Gasto</option>
+              <option value=2>Inversión</option>
+            </select>
+        </mat-form-field>
+
+        <button #submitButton matInput mat-flat-button [ngStyle]="{
+        'margin-top': '-18px',
+        'margin-left': '10px',
+        padding: '28px'
+        }" color="accent" type="submit">
+        {{tituloBotones}}
+    </button>
+    </form>
+</div>
