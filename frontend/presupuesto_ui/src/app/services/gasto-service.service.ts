@@ -23,7 +23,7 @@ export class GastoService {
 
   constructor(private http: HttpClient) { }
 
-  get_listGastos(id: string): Observable<Gasto[]> {
-    return this.http.get<Gasto[]>(`${this.url_services}/gastosPresupuesto/${id}`);
+  get_listGastos(): Gasto[] {
+    return this.listaGastos;
   }
 }
