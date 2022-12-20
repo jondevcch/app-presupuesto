@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './components/structure/header/header.component';
 import { FooterComponent } from './components/structure/footer/footer.component';
 import { PresupuestoComponent } from './components/presupuesto/presupuesto/presupuesto.component';
 import { ListaPresupuestoComponent } from './components/presupuesto/lista-presupuesto/lista-presupuesto.component';
@@ -24,11 +23,13 @@ import { GastoComponent } from './components/gasto/gasto/gasto.component';
 import { ListaGastosComponent } from './components/gasto/lista-gastos/lista-gastos.component';
 import { MantGastoComponent } from './components/gasto/mant-gasto/mant-gasto.component';
 
+import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     SideNavListComponent,
-    HeaderComponent,
     FooterComponent,
     PresupuestoComponent,
     ListaPresupuestoComponent,
@@ -48,6 +49,7 @@ import { MantGastoComponent } from './components/gasto/mant-gasto/mant-gasto.com
       { useHash: true }
     ),
     MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

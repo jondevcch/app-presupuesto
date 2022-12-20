@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -34,7 +35,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatNativeDateModule,
     MatExpansionModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,    
+    MatSelectModule
   ],
 })
 export class MaterialModule {}

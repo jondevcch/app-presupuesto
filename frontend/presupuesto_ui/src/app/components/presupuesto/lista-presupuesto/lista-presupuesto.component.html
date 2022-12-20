@@ -1,40 +1,49 @@
 <p>
     <mat-toolbar>
-        <h1 [ngStyle]="{ color: '#199d54' }">Listado de presupuestos</h1>
+        <span>Panel de presupuestos</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
+            <mat-icon color="accent">add_circle_outline</mat-icon>
+        </button>
     </mat-toolbar>
 </p>
 
+<div class="mat-elevation-z8" *ngIf="editionMode">
+    <app-mant-presupuesto (cargarPresupuestos)="get_listPresupuestos()" [presupuestoEdit]="presupuestoEdit"></app-mant-presupuesto>
+</div>
+
 <div class="mat-elevation-z8">
+    <p>
+        <mat-toolbar>
+            <h3 [ngStyle]="{ color: '#69f0ae' }">Listado de presupuestos</h3>
+        </mat-toolbar>
+    </p>
     <!-- Contacts table -->
     <table mat-table [dataSource]="listaPresupuesto" [ngStyle]="{ 'margin-top': '30px' }">
         <!-- FirstName column -->
         <ng-container matColumnDef="nombre">
-            <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
-            <mat-cell *matCellDef="let pre">
-                {{ pre.nombre | titlecase }}
+            <mat-header-cell *matHeaderCellDef class="text-color-columns ">Presupuesto Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                {{ presupuesto.nombre | titlecase }}
             </mat-cell>
         </ng-container>
 
         <!-- LastName column -->
         <ng-container matColumnDef="monto">
-            <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
-            <mat-cell *matCellDef="let pre">
-                {{ pre.monto | currency }}
+            <mat-header-cell *matHeaderCellDef class="text-color-columns ">Monto Presupuesto</mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                {{ presupuesto.monto | currency }}
             </mat-cell>
         </ng-container>
 
 
         <!-- Buttons column -->
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>Action Buttons</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-                < Edit button>
-                    <button mat-fab extended>
-            Home
-          </button> &nbsp;
-                    <button mat-flat-button color="warn">
-            Delete
-          </button> </mat-cell>
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                <button mat-flat-button color="accent" (click)="cargarPresupuesto(presupuesto._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn"><mat-icon>delete</mat-icon>Borrar</button>
+            </mat-cell>
         </ng-container>
 
         <!-- Table settings -->

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { listaPresupuestos } from '../dataPresupuestos';
 import { Presupuesto } from '../interfaces/Presupuesto';
 
 @Injectable({
@@ -19,7 +18,7 @@ export class PresupuestoService {
     }),
   };
 
-  listado: Presupuesto[] = listaPresupuestos;
+  listado!: Presupuesto[];
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +26,16 @@ export class PresupuestoService {
     return this.http.get<Presupuesto[]>(`${this.url_services}/presupuestos`);
   }
 
-  get_Presupuesto(id: number): Presupuesto | undefined {
-    return this.listado.find((r) => r.id === id);
+  get_Presupuesto(id: String): Observable<Presupuesto> {
+    return this.http.get<Presupuesto>(`${this.url_services}/presupuesto/${id}`);
+  }
+
+  add_Presupuesto(presupuesto: Presupuesto): Observable<Presupuesto> {
+    return this.http.post<Presupuesto>(`${this.url_services}/presupuesto`, presupuesto, this.httpOptions);
+  }
+
+  update_Presupuesto(id:string, presupuestoEditado: Presupuesto): Observable<Presupuesto> {
+    return this.http.put<Presupuesto>(`${this.url_services}/presupuesto/${id}`, presupuestoEditado, this.httpOptions);
   }
 
 }
