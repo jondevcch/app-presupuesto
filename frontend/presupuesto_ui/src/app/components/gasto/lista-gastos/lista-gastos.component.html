@@ -1,17 +1,17 @@
 <p>
     <mat-toolbar>
-        <h1 [ngStyle]="{ color: '#199d54' }">Listado de presupuestos</h1>
+        <h1 [ngStyle]="{ color: '#199d54' }">Listado de Gastos</h1>
     </mat-toolbar>
 </p>
 
 <div class="mat-elevation-z8">
     <!-- Contacts table -->
-    <table mat-table [dataSource]="listaPresupuesto" [ngStyle]="{ 'margin-top': '30px' }">
+    <table mat-table [dataSource]="listaGastos" [ngStyle]="{ 'margin-top': '30px' }">
         <!-- FirstName column -->
-        <ng-container matColumnDef="nombre">
+        <ng-container matColumnDef="nombreGasto">
             <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
             <mat-cell *matCellDef="let pre">
-                {{ pre.nombre | titlecase }}
+                {{ pre.nombreGasto | titlecase }}
             </mat-cell>
         </ng-container>
 
@@ -30,11 +30,12 @@
             <mat-cell *matCellDef="let contact">
                 < Edit button>
                     <button mat-fab extended>
-            Home
-          </button> &nbsp;
+                        Home
+                    </button> &nbsp;
                     <button mat-flat-button color="warn">
-            Delete
-          </button> </mat-cell>
+                        Delete
+                    </button>
+            </mat-cell>
         </ng-container>
 
         <!-- Table settings -->
