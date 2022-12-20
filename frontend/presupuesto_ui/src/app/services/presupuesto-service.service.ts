@@ -31,7 +31,4 @@ export class PresupuestoService {
     return this.listado.find((r) => r.id === id);
   }
 
-  
-
-
 }

@@ -20,6 +20,9 @@ const appRoutes: Routes = [
 ];
 
 import { HttpClientModule } from "@angular/common/http";
+import { GastoComponent } from './components/gasto/gasto/gasto.component';
+import { ListaGastosComponent } from './components/gasto/lista-gastos/lista-gastos.component';
+import { MantGastoComponent } from './components/gasto/mant-gasto/mant-gasto.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { HttpClientModule } from "@angular/common/http";
     PresupuestoComponent,
     ListaPresupuestoComponent,
     MantPresupuestoComponent,
+    GastoComponent,
+    ListaGastosComponent,
+    MantGastoComponent,
   ],
   imports: [
     BrowserModule,

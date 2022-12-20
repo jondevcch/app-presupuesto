@@ -16,23 +16,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatListModule,
-    MatTableModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule, 
-    MatIconModule,
-    MatMenuModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatExpansionModule
-  ],
   exports: [
     MatTabsModule,
     MatSidenavModule,
