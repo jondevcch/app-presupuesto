@@ -19,6 +19,8 @@ const appRoutes: Routes = [
 
 ];
 
+import { HttpClientModule } from "@angular/common/http";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserModule, 
     BrowserAnimationsModule ,

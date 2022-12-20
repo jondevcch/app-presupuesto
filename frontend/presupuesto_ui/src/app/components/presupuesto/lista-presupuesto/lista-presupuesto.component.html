@@ -13,34 +13,26 @@
         <ng-container matColumnDef="monto">
             <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
             <mat-cell *matCellDef="let pre">
-                {{ pre.monto  }}
+                {{ pre.monto | currency }}
             </mat-cell>
         </ng-container>
 
-        
-    <!-- Buttons column -->
-    <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef>Action Buttons</mat-header-cell>
-        <mat-cell *matCellDef="let contact">
-          <button
-            mat-flat-button
-            color="accent" 
-          >
-            Edit
-          </button>
 
-          <button mat-fab extended>
+        <!-- Buttons column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Action Buttons</mat-header-cell>
+            <mat-cell *matCellDef="let contact">
+                < Edit button>
+                    <button mat-fab extended>
             Home
-          </button>
-          &nbsp;
-          <button mat-flat-button color="warn" >
+          </button> &nbsp;
+                    <button mat-flat-button color="warn">
             Delete
-          </button>
-        </mat-cell>
-      </ng-container>
+          </button> </mat-cell>
+        </ng-container>
 
         <!-- Table settings -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </table> 
+    </table>
 </div>
