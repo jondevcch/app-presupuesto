@@ -13,7 +13,7 @@ import { MaterialModule } from './material.module';
 import {RouterModule, Routes} from "@angular/router";
 
 const appRoutes: Routes = [
-  { path: 'first', component: ListaPresupuestoComponent, data: { title: 'First Component' } },
+  { path: 'presupuestos', component: ListaPresupuestoComponent, data: { title: 'First Component' } },
   { path: 'segundo', component: FooterComponent, data: { title: 'segundo Component' } },
 
 ];

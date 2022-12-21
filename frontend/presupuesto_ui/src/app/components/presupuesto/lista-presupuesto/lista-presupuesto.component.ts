@@ -14,7 +14,7 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
 
   dataSource!: MatTableDataSource<Presupuesto>;
   listaPresupuesto!: Presupuesto[];
-  displayedColumns: string[] = ['nombre', 'monto', 'id'];
+  displayedColumns: string[] = ['nombre', 'divisa', 'monto', 'id'];
   editionMode = false;
 
   @ViewChild('paginator') paginator!: MatPaginator
@@ -41,6 +41,17 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
     this.presupuestoServices.get_listPresupuestos().subscribe((presupuestos)=> {
       this.listaPresupuesto = presupuestos;
     });
+  }
+
+  
+  deletePresupuesto(id: string) {
+    this.presupuestoServices.delete_Presupuesto(id).subscribe((presupuesto)=> {
+      this.get_listPresupuestos();
+   });
+  }
+
+  visualizarGastos(presupuesto : Presupuesto) {
+    console.log(presupuesto);
   }
 
   mostrarMantenimiento(mostrar = false){
