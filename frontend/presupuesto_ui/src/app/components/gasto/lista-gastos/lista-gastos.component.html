@@ -1,5 +1,20 @@
 <p>
     <mat-toolbar>
+        <span>Panel de presupuestos</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            (click)="mostrarMantenimiento(true)">
+            <mat-icon color="accent">add_circle_outline</mat-icon>
+        </button>
+    </mat-toolbar>
+</p>
+
+<div class="mat-elevation-z8" *ngIf="editionMode">
+    <app-mant-gasto (cargarGastos)="get_listGastos()" [gastoEdit]="gastoEdit"></app-mant-gasto>
+</div>
+
+<p>
+    <mat-toolbar>
         <h1 [ngStyle]="{ color: '#199d54' }">Listado de Gastos</h1>
     </mat-toolbar>
 </p>
@@ -8,10 +23,10 @@
 
     <table mat-table [dataSource]="dataSource" [ngStyle]="{ 'margin-top': '30px' }">
 
-        <ng-container matColumnDef="nombreGasto">
-            <mat-header-cell *matHeaderCellDef>Presupuesto</mat-header-cell>
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef> Descripción del gasto</mat-header-cell>
             <mat-cell *matCellDef="let pre">
-                {{ pre.nombreGasto | titlecase }}
+                {{ pre.nombre | titlecase }}
             </mat-cell>
         </ng-container>
 
@@ -22,7 +37,17 @@
             </mat-cell>
         </ng-container>
 
+        <!-- Buttons column -->
         <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let pre">
+                <button mat-flat-button color="accent"
+                    (click)="cargarGasto(pre._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn"><mat-icon>delete</mat-icon>Borrar</button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let contact">
                 <button mat-flat-button color="accent">
@@ -32,7 +57,7 @@
                     Borrar
                 </button>
             </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

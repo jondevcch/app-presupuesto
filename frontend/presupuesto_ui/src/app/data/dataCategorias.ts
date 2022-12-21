@@ -1,4 +1,4 @@
-import { Categoria } from "./interfaces/categoria";
+import { Categoria } from "../interfaces/categoria";
 
 export let listaCategorias: Categoria[] = [
     {

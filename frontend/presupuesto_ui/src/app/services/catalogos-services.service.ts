@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { listaDivisas } from '../dataDivisa';
-import { listaCategorias } from '../dataCategorias';
+import { listaDivisas } from '../data/dataDivisa';
+import { listaCategorias } from '../data/dataCategorias';
 import { Divisa } from '../interfaces/divisa';
 import { Categoria } from '../interfaces/categoria';
 
