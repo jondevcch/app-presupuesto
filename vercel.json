@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "public": true,
+    "name": "presupuesto",
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/index.html" }
+    ]
+}
