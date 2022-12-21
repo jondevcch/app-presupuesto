@@ -14,7 +14,7 @@ import { RouterModule, Routes } from "@angular/router";
 const appRoutes: Routes = [
   { path: '', redirectTo: 'presupuestos', pathMatch: 'full' },
   { path: 'presupuestos', component: ListaPresupuestoComponent },
-  { path: 'gastos', component: ListaGastosComponent },
+  { path: 'gastos/:id', component: ListaGastosComponent },
   { path: '**', redirectTo: '/presupuestos', pathMatch: 'full'}
 ];
 
