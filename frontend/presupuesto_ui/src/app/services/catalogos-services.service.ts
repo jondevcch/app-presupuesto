@@ -22,4 +22,12 @@ export class CatalogosServices {
   get_listaCategorias(): Categoria[] {
     return this.listaCategorias;
   }
+
+  get_nombreDivisas(id: string) : string | undefined {
+    return this.listaDivisas.find(f=>f.idDivisa === id)?.nombreDivisa;
+  }
+
+  get_nombreCategoria(id: number) : string | undefined {
+    return this.listaCategorias.find(f=>f.idCategoria === id)?.nombreCategoria;
+  }
 }
