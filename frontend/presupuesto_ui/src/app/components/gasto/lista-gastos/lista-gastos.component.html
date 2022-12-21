@@ -19,29 +19,27 @@
 </p>
 
 <div class="mat-elevation-z8">
-
     <table mat-table [dataSource]="dataSource" [ngStyle]="{ 'margin-top': '30px' }">
-
         <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef> Descripción del gasto</mat-header-cell>
-            <mat-cell *matCellDef="let pre">
-                {{ pre.nombre | titlecase }}
+            <mat-cell *matCellDef="let gas">
+                {{ gas.nombre | titlecase }}
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="monto">
             <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
-            <mat-cell *matCellDef="let pre">
-                {{ pre.monto | currency }}
+            <mat-cell *matCellDef="let gas">
+                {{ gas.monto | currency: presupuesto.divisa :'symbol'}}
             </mat-cell>
         </ng-container>
 
         <!-- Buttons column -->
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let pre">
-                <button mat-flat-button color="accent" (click)="cargarGasto(pre._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
-                <button mat-flat-button color="warn" (click)="borrarGasto(pre._id)"><mat-icon>delete</mat-icon>Borrar</button>
+            <mat-cell *matCellDef="let gas">
+                <button mat-flat-button color="accent" (click)="cargarGasto(gas._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn" (click)="borrarGasto(gas._id)"><mat-icon>delete</mat-icon>Borrar</button>
             </mat-cell>
         </ng-container>
 
@@ -52,21 +50,19 @@
 </div>
 
 <div class="card-wrapper" style="text-align: center;">
-
     <mat-card class="example-card" style="text-align: center;">
         <mat-card-content>
             <mat-grid-list class="labelDescription" cols="3" rowHeight="100px">
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
-                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency}}</p>
+                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency: presupuesto.divisa :'symbol'}}</p>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
-                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency}}</p>
+                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency: presupuesto.divisa :'symbol'}}</p>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
-                    <p class="labelDescription">Balance:&nbsp;{{Balance | currency}}</p>
+                    <p class="labelDescription">Balance:&nbsp;{{Balance | currency: presupuesto.divisa :'symbol'}}</p>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-card-content>
     </mat-card>
-
 </div>

@@ -1,9 +1,9 @@
-import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { Gasto } from 'src/app/interfaces/gasto';
 import { GastoService } from 'src/app/services/gasto-service.service';
+
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-mant-gasto',
@@ -12,21 +12,18 @@ import { GastoService } from 'src/app/services/gasto-service.service';
 })
 export class MantGastoComponent implements OnInit {
 
+  messageAction: string = '';
   tituloBotones: string = '';
-
   editionMode: boolean = true;
-
   gasto: Gasto = { _id: '', idPresupuesto: '', nombre: '', monto: 0 };
 
   @ViewChild('gastoForm') gastoForm!: NgForm;
-
   @Output() cargarGastos = new EventEmitter();
-
   @Input() gastoEdit!: Gasto;
 
   @Input() idPresupuesto!: string;
 
-  constructor(private gastoServices: GastoService) { }
+  constructor(private gastoServices: GastoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.editionMode = (typeof this.gastoEdit === 'undefined') ? false : true;
@@ -44,6 +41,7 @@ export class MantGastoComponent implements OnInit {
     this.gasto.idPresupuesto = this.idPresupuesto;
     this.gastoServices.add_Gasto(this.gasto).subscribe(() => {
       this.cargarGastos.next('');
+        this.showSnackbarTopPosition('El gasto se ha agregado exitosamente', '')
     });
   }
 
@@ -51,9 +49,20 @@ export class MantGastoComponent implements OnInit {
 
     let gastoEditado = this.gastoForm.value;
     gastoEditado.idPresupuesto = this.idPresupuesto;
-    this.gastoServices.update_Gasto(this.gastoEdit._id, gastoEditado).subscribe(() => {
+
+    this.gastoServices.update_Gasto(this.gastoEdit._id, this.gastoForm.value).subscribe((pre) => {
       this.cargarGastos.next('');
+      this.showSnackbarTopPosition('El gasto se ha modificado exitosamente', '')
     });
   }
 
+  
+  showSnackbarTopPosition(message:string, action?:string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
+  }
 }

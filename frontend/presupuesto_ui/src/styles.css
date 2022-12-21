@@ -22,3 +22,8 @@ body {
 .wide-input {
     width: 20%;
 }
+
+::ng-deep .custom-style-notificacion{
+    background-color: #199d54;
+    color: white;
+}

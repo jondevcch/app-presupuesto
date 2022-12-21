@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { GastoService } from 'src/app/services/gasto-service.service';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { Route, Router } from '@angular/router';
-
+import { MatSnackBar } from "@angular/material/snack-bar";
 @Component({
   selector: 'app-lista-gastos',
   templateUrl: './lista-gastos.component.html',
@@ -17,7 +17,6 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   dataSource!: MatTableDataSource<Gasto>;
   listaGastos!: Gasto[];
-  // listadoGastos!: Gasto[];
 
   displayedColumns: string[] = ['nombre', 'monto', 'id'];
   editionMode = false;
@@ -30,11 +29,10 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   gastoEdit !: Gasto;
 
-
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
-  constructor(private gastoService: GastoService) {}
+  constructor(private gastoService: GastoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.presupuesto = this.gastoService.presupuesto;
@@ -51,13 +49,7 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   get_listGastos() {
 
-    // let oPresupuesto: Presupuesto = {
-    //   _id: '63a0ab96eae9fac894e51140',
-    //   monto: 50000,
-    //   idUsuario: '',
-    //   nombre: ''
-    // };
-
+    debugger;
     this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
       this.listaGastos = gastos;
       this.LoadTable();
@@ -80,6 +72,7 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   cargarGasto(id: String) {
     this.mostrarMantenimiento(false);
+
     if (id !== '') {
       this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
         this.gastoEdit = gastos.filter(x => x._id == id)[0];
@@ -90,11 +83,20 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   borrarGasto(id: string) {
     this.mostrarMantenimiento(false);
-
     if (id !== '') {
       this.gastoService.delete_Gasto(id).subscribe((gastos) => {
         this.get_listGastos();
+        this.showSnackbarTopPosition('El gasto se ha borrado exitosamente', '')
       });
     }
+  }
+
+  showSnackbarTopPosition(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
   }
 }
