@@ -23,7 +23,9 @@ export class MantGastoComponent implements OnInit {
 
   @Input() idPresupuesto!: string;
 
-  constructor(private gastoServices: GastoService, private snackBar: MatSnackBar) { }
+  constructor(private gastoServices: GastoService, private snackBar: MatSnackBar) {
+    
+  }
 
   ngOnInit(): void {
     this.editionMode = (typeof this.gastoEdit === 'undefined') ? false : true;

@@ -55,7 +55,7 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
 
   visualizarGastos(presupuesto : Presupuesto) {
     this.gastosServices.presupuesto = presupuesto;
-    this.route.navigate(['gastos']);
+    this.route.navigate(['gastos', presupuesto._id]);
   }
 
   mostrarMantenimiento(mostrar = false){
