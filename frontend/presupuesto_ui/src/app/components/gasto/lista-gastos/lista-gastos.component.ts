@@ -17,7 +17,6 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   dataSource!: MatTableDataSource<Gasto>;
   listaGastos!: Gasto[];
-  // listadoGastos!: Gasto[];
 
   displayedColumns: string[] = ['nombre', 'monto', 'id'];
   editionMode = false;
@@ -29,7 +28,6 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   presupuesto!: Presupuesto;
 
   gastoEdit !: Gasto;
-
 
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
@@ -50,13 +48,6 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   get_listGastos() {
-
-    // let oPresupuesto: Presupuesto = {
-    //   _id: '63a0ab96eae9fac894e51140',
-    //   monto: 50000,
-    //   idUsuario: '',
-    //   nombre: ''
-    // };
 
     this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
       this.listaGastos = gastos;
