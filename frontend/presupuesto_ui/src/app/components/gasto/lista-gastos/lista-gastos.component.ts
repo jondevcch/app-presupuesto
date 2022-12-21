@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 
 import { GastoService } from 'src/app/services/gasto-service.service';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-lista-gastos',
@@ -33,7 +34,7 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
-  constructor(private gastoService: GastoService) { }
+  constructor(private gastoService: GastoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.get_listGastos();
@@ -78,7 +79,7 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   cargarGasto(id: String) {
 
     this.mostrarMantenimiento(false);
-
+    debugger;
     if (id !== '') {
       this.gastoService.get_listGastos(id).subscribe((gastos) => {
         this.gastoEdit = gastos.filter(x => x._id == id)[0];
@@ -88,15 +89,21 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   borrarGasto(id: string) {
-    debugger;
-
     this.mostrarMantenimiento(false);
-
     if (id !== '') {
       this.gastoService.delete_Gasto(id).subscribe((gastos) => {
-        debugger;
         this.get_listGastos();
+        this.showSnackbarTopPosition('El gasto se ha borrado exitosamente', '')
       });
     }
+  }
+
+  showSnackbarTopPosition(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
   }
 }

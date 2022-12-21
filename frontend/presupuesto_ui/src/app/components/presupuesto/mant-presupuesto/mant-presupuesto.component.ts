@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { NgForm } from '@angular/forms';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { PresupuestoService } from 'src/app/services/presupuesto-service.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-mant-presupuesto',
@@ -23,7 +24,7 @@ export class MantPresupuestoComponent implements OnInit  {
 
   @Input() presupuestoEdit!: Presupuesto;
 
-  constructor(private presupuestoServices: PresupuestoService){}
+  constructor(private presupuestoServices: PresupuestoService, private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
       this.editionMode = (typeof this.presupuestoEdit === 'undefined') ? false : true;
@@ -52,6 +53,15 @@ export class MantPresupuestoComponent implements OnInit  {
     this.presupuestoServices.get_Presupuesto(id).subscribe((presupuesto)=> {
       this.presupuestoEdit = presupuesto;
    });
+  }
+
+  showSnackbarTopPosition(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
   }
 
 }

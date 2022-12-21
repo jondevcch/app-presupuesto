@@ -1,9 +1,9 @@
-import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { Gasto } from 'src/app/interfaces/gasto';
 import { GastoService } from 'src/app/services/gasto-service.service';
+
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-mant-gasto',
@@ -12,19 +12,16 @@ import { GastoService } from 'src/app/services/gasto-service.service';
 })
 export class MantGastoComponent implements OnInit {
 
+  messageAction: string = '';
   tituloBotones: string = '';
-
   editionMode: boolean = true;
-
   gasto: Gasto = { _id: '', idPresupuesto: '', nombre: '', monto: 0 };
 
   @ViewChild('gastoForm') gastoForm!: NgForm;
-
   @Output() cargarGastos = new EventEmitter();
-
   @Input() gastoEdit!: Gasto;
 
-  constructor(private gastoServices: GastoService) { }
+  constructor(private gastoServices: GastoService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.editionMode = (typeof this.gastoEdit === 'undefined') ? false : true;
@@ -42,22 +39,23 @@ export class MantGastoComponent implements OnInit {
   add_gasto() {
     this.gastoServices.add_Gasto(this.gastoForm.value).subscribe((pre) => {
       this.cargarGastos.next('');
+        this.showSnackbarTopPosition('El gasto se ha agregado exitosamente', '')
     });
   }
 
   update_gasto() {
-
-    debugger;
-
     this.gastoServices.update_Gasto(this.gastoEdit._id, this.gastoForm.value).subscribe((pre) => {
       this.cargarGastos.next('');
+      this.showSnackbarTopPosition('El gasto se ha modificado exitosamente', '')
     });
   }
 
-  // get_gasto(id: string){
-  //   this.gastoServices.get_listGastos(id).subscribe((presupuesto)=> {
-  //     this.presupuestoEdit = presupuesto;
-  //  });
-  // }
-
+  showSnackbarTopPosition(message:string, action?:string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
+  }
 }
