@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "build": "ng build --prod"
+        "build": "ng build --configuration production"
     },
     "repository": {
         "type": "git",
