@@ -1,10 +1,10 @@
-body { 
+body {
     margin: 0;
     height: 100%;
     background-color: white;
 }
 
-.labelDescription{
+.labelDescription {
     font-size: large;
 }
 
@@ -15,6 +15,8 @@ p {
     margin: 0 0 0.142857143em;
     border-bottom: 2px solid #753BBD;
     transition: color .45s ease, border .45s ease;
-  }
+}
 
-  
+.example-spacer {
+    flex: 1 1 auto;
+}

@@ -24,40 +24,36 @@ export class MantGastoComponent implements OnInit {
 
   @Input() gastoEdit!: Gasto;
 
+  @Input() idPresupuesto!: string;
+
   constructor(private gastoServices: GastoService) { }
 
   ngOnInit(): void {
     this.editionMode = (typeof this.gastoEdit === 'undefined') ? false : true;
     this.gasto = (typeof this.gastoEdit === 'undefined') ? this.gasto : this.gastoEdit;
     this.tituloBotones = this.editionMode ? 'Editar gasto' : 'Agregar gasto';
+    this.gasto.idPresupuesto = this.idPresupuesto;
   }
 
   mantenimiento() {
-
-    debugger;
-
     this.editionMode ? this.update_gasto() : this.add_gasto();
   }
 
   add_gasto() {
-    this.gastoServices.add_Gasto(this.gastoForm.value).subscribe((pre) => {
+    this.gasto = this.gastoForm.value;
+    this.gasto.idPresupuesto = this.idPresupuesto;
+    this.gastoServices.add_Gasto(this.gasto).subscribe(() => {
       this.cargarGastos.next('');
     });
   }
 
   update_gasto() {
 
-    debugger;
-
-    this.gastoServices.update_Gasto(this.gastoEdit._id, this.gastoForm.value).subscribe((pre) => {
+    let gastoEditado = this.gastoForm.value;
+    gastoEditado.idPresupuesto = this.idPresupuesto;
+    this.gastoServices.update_Gasto(this.gastoEdit._id, gastoEditado).subscribe(() => {
       this.cargarGastos.next('');
     });
   }
-
-  // get_gasto(id: string){
-  //   this.gastoServices.get_listGastos(id).subscribe((presupuesto)=> {
-  //     this.presupuestoEdit = presupuesto;
-  //  });
-  // }
 
 }

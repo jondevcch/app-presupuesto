@@ -38,4 +38,8 @@ export class PresupuestoService {
     return this.http.put<Presupuesto>(`${this.url_services}/presupuesto/${id}`, presupuestoEditado, this.httpOptions);
   }
 
+  delete_Presupuesto(id:string): Observable<Presupuesto> {
+    return this.http.delete<Presupuesto>(`${this.url_services}/presupuesto/${id}`,this.httpOptions);
+  }
+
 }

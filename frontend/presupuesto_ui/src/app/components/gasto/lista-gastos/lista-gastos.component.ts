@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 
 import { GastoService } from 'src/app/services/gasto-service.service';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-gastos',
@@ -33,9 +34,10 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
-  constructor(private gastoService: GastoService) { }
+  constructor(private gastoService: GastoService) {}
 
   ngOnInit(): void {
+    this.presupuesto = this.gastoService.presupuesto;
     this.get_listGastos();
   }
 
@@ -49,17 +51,17 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   get_listGastos() {
 
-    let oPresupuesto: Presupuesto = {
-      _id: '63a0ab96eae9fac894e51140',
-      monto: 50000,
-      idUsuario: '',
-      nombre: ''
-    };
+    // let oPresupuesto: Presupuesto = {
+    //   _id: '63a0ab96eae9fac894e51140',
+    //   monto: 50000,
+    //   idUsuario: '',
+    //   nombre: ''
+    // };
 
-    this.gastoService.get_listGastos(oPresupuesto._id).subscribe((gastos) => {
+    this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
       this.listaGastos = gastos;
       this.LoadTable();
-      this.CalcularTotales(oPresupuesto.monto);
+      this.CalcularTotales(this.presupuesto.monto);
       this.mostrarMantenimiento(false);
     });
   }
@@ -70,17 +72,16 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   CalcularTotales(monto: number) {
+    this.totalGastos = 0;
     this.montoPresupuesto = monto;
     this.listaGastos.forEach(element => { this.totalGastos += element.monto; });
     this.Balance = this.montoPresupuesto - this.totalGastos;
   }
 
   cargarGasto(id: String) {
-
     this.mostrarMantenimiento(false);
-
     if (id !== '') {
-      this.gastoService.get_listGastos(id).subscribe((gastos) => {
+      this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
         this.gastoEdit = gastos.filter(x => x._id == id)[0];
         this.mostrarMantenimiento(true);
       });
@@ -88,13 +89,10 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   borrarGasto(id: string) {
-    debugger;
-
     this.mostrarMantenimiento(false);
 
     if (id !== '') {
       this.gastoService.delete_Gasto(id).subscribe((gastos) => {
-        debugger;
         this.get_listGastos();
       });
     }

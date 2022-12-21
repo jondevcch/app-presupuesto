@@ -4,6 +4,8 @@ import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GastoService } from 'src/app/services/gasto-service.service';
 
 @Component({
   selector: 'app-lista-presupuesto',
@@ -14,7 +16,7 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
 
   dataSource!: MatTableDataSource<Presupuesto>;
   listaPresupuesto!: Presupuesto[];
-  displayedColumns: string[] = ['nombre', 'monto', 'id'];
+  displayedColumns: string[] = ['nombre', 'divisa', 'monto', 'id'];
   editionMode = false;
 
   @ViewChild('paginator') paginator!: MatPaginator
@@ -26,7 +28,7 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
 
   @ViewChild('presupuestoForm') presupuestoForm!: NgForm;
 
-  constructor(private presupuestoServices: PresupuestoService) { }
+  constructor(private presupuestoServices: PresupuestoService, private gastosServices: GastoService, private route: Router) { }
 
   ngOnInit(): void {
     this.get_listPresupuestos();
@@ -41,6 +43,18 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
     this.presupuestoServices.get_listPresupuestos().subscribe((presupuestos)=> {
       this.listaPresupuesto = presupuestos;
     });
+  }
+
+  
+  deletePresupuesto(id: string) {
+    this.presupuestoServices.delete_Presupuesto(id).subscribe((presupuesto)=> {
+      this.get_listPresupuestos();
+   });
+  }
+
+  visualizarGastos(presupuesto : Presupuesto) {
+    this.gastosServices.presupuesto = presupuesto;
+    this.route.navigate(['gastos']);
   }
 
   mostrarMantenimiento(mostrar = false){

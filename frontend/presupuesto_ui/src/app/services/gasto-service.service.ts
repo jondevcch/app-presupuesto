@@ -4,11 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Gasto } from '../interfaces/gasto';
+import { Presupuesto } from '../interfaces/Presupuesto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastoService {
+
+  presupuesto!: Presupuesto;
 
   url_services = 'https://api-presupuesto.vercel.app/curso_angular/api';
 
@@ -25,7 +28,6 @@ export class GastoService {
   }
 
   add_Gasto(gasto: Gasto): Observable<Gasto> {
-    gasto.idPresupuesto = '63a0ab96eae9fac894e51140';
     return this.http.post<Gasto>(`${this.url_services}/gasto`, gasto, this.httpOptions);
   }
 

@@ -12,8 +12,10 @@ import { MaterialModule } from './material.module';
 import { RouterModule, Routes } from "@angular/router";
 
 const appRoutes: Routes = [
-  { path: 'first', component: ListaPresupuestoComponent, data: { title: 'First Component' } },
-  { path: 'segundo', component: FooterComponent, data: { title: 'segundo Component' } },
+  { path: '', redirectTo: 'presupuestos', pathMatch: 'full' },
+  { path: 'presupuestos', component: ListaPresupuestoComponent },
+  { path: 'gastos', component: ListaGastosComponent },
+  { path: '**', redirectTo: '/presupuestos', pathMatch: 'full'}
 ];
 
 import { HttpClientModule } from "@angular/common/http";
@@ -39,10 +41,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { useHash: true }
-    ),
+    RouterModule.forRoot(appRoutes),
     MaterialModule,
     FormsModule
   ],
