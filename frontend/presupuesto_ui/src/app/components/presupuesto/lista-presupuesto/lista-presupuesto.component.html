@@ -1,10 +1,6 @@
 <p>
     <mat-toolbar>
         <span>Panel de presupuestos</span>
-        <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
-            <mat-icon color="accent">add_circle_outline</mat-icon>
-        </button>
     </mat-toolbar>
 </p>
 
@@ -17,6 +13,10 @@
     <p>
         <mat-toolbar>
             <h3 [ngStyle]="{ color: '#69f0ae' }">Listado de presupuestos</h3>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
+                <mat-icon color="accent">add_circle_outline</mat-icon>
+            </button>
         </mat-toolbar>
     </p>
     <!-- Contacts table -->

@@ -6,8 +6,9 @@ import { NgForm } from '@angular/forms';
 
 import { GastoService } from 'src/app/services/gasto-service.service';
 import { Presupuesto } from 'src/app/interfaces/Presupuesto';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { PresupuestoService } from 'src/app/services/presupuesto-service.service';
 @Component({
   selector: 'app-lista-gastos',
   templateUrl: './lista-gastos.component.html',
@@ -27,16 +28,23 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   presupuesto!: Presupuesto;
 
+  presupuestoID!: String;  //ID del presupuesto que se le esta asignando gastos
+
   gastoEdit !: Gasto;
 
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
-  constructor(private gastoService: GastoService, private snackBar: MatSnackBar) { }
+  constructor(private gastoService: GastoService, private presupuestoServices: PresupuestoService, 
+    private snackBar: MatSnackBar, private Activatedroute: ActivatedRoute) { 
+    this.presupuestoID = Activatedroute.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
-    this.presupuesto = this.gastoService.presupuesto;
-    this.get_listGastos();
+    this.presupuestoServices.get_Presupuesto(this.presupuestoID).subscribe((pre)=>{
+      this.presupuesto = pre;
+      this.get_listGastos();
+    });
   }
 
   ngAfterViewInit() {
@@ -48,8 +56,6 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   get_listGastos() {
-
-    debugger;
     this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
       this.listaGastos = gastos;
       this.LoadTable();

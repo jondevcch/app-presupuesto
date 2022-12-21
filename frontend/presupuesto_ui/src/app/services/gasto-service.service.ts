@@ -31,6 +31,7 @@ export class GastoService {
     return this.http.post<Gasto>(`${this.url_services}/gasto`, gasto, this.httpOptions);
   }
 
+
   update_Gasto(id: string, gastoEditado: Gasto): Observable<Gasto> {
     return this.http.put<Gasto>(`${this.url_services}/gasto/${id}`, gastoEditado, this.httpOptions);
   }
