@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true}),
     MaterialModule,
     FormsModule
   ],
