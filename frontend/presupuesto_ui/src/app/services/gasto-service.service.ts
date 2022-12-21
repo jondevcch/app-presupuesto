@@ -32,4 +32,8 @@ export class GastoService {
   update_Gasto(id: string, gastoEditado: Gasto): Observable<Gasto> {
     return this.http.put<Gasto>(`${this.url_services}/gasto/${id}`, gastoEditado, this.httpOptions);
   }
+
+  delete_Gasto(id: string): Observable<Gasto> {
+    return this.http.delete<Gasto>(`${this.url_services}/gasto/${id}`, this.httpOptions);
+  }
 }

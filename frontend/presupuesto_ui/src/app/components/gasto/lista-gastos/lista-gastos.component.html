@@ -43,21 +43,9 @@
             <mat-cell *matCellDef="let pre">
                 <button mat-flat-button color="accent"
                     (click)="cargarGasto(pre._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
-                <button mat-flat-button color="warn"><mat-icon>delete</mat-icon>Borrar</button>
+                <button mat-flat-button color="warn" (click)="borrarGasto(pre._id)"><mat-icon>delete</mat-icon>Borrar</button>
             </mat-cell>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-                <button mat-flat-button color="accent">
-                    Editar
-                </button> &nbsp;
-                <button mat-flat-button color="warn">
-                    Borrar
-                </button>
-            </mat-cell>
-        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

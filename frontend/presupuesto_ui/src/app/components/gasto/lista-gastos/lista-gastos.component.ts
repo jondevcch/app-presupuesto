@@ -86,4 +86,17 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
       });
     }
   }
+
+  borrarGasto(id: string) {
+    debugger;
+
+    this.mostrarMantenimiento(false);
+
+    if (id !== '') {
+      this.gastoService.delete_Gasto(id).subscribe((gastos) => {
+        debugger;
+        this.get_listGastos();
+      });
+    }
+  }
 }
