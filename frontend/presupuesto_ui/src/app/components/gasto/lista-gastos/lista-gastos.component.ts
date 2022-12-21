@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 
 import { GastoService } from 'src/app/services/gasto-service.service';
+import { Presupuesto } from 'src/app/interfaces/Presupuesto';
 
 @Component({
   selector: 'app-lista-gastos',
@@ -12,16 +13,23 @@ import { GastoService } from 'src/app/services/gasto-service.service';
   styleUrls: ['./lista-gastos.component.css']
 })
 export class ListaGastosComponent implements AfterViewInit, OnInit {
- 
+
   dataSource!: MatTableDataSource<Gasto>;
   listaGastos!: Gasto[];
-  displayedColumns: string[] = ['nombreGasto', 'monto', 'id'];
+  // listadoGastos!: Gasto[];
+
+  displayedColumns: string[] = ['nombre', 'monto', 'id'];
   editionMode = false;
 
   montoPresupuesto: number = 0;
   totalGastos: number = 0;
   Balance: number = 0;
-  
+
+  presupuesto!: Presupuesto;
+
+  gastoEdit !: Gasto;
+
+
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
@@ -32,14 +40,63 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    this.LoadTable();
+  }
+
+  mostrarMantenimiento(mostrar = false) {
+    this.editionMode = mostrar;
+  }
+
+  get_listGastos() {
+
+    let oPresupuesto: Presupuesto = {
+      _id: '63a0ab96eae9fac894e51140',
+      monto: 50000,
+      idUsuario: '',
+      nombre: ''
+    };
+
+    this.gastoService.get_listGastos(oPresupuesto._id).subscribe((gastos) => {
+      this.listaGastos = gastos;
+      this.LoadTable();
+      this.CalcularTotales(oPresupuesto.monto);
+      this.mostrarMantenimiento(false);
+    });
+  }
+
+  LoadTable() {
     this.dataSource = new MatTableDataSource(this.listaGastos);
     this.dataSource.paginator = this.paginator;
   }
 
-  get_listGastos() {
-    this.montoPresupuesto = 50000;
-    this.listaGastos = this.gastoService.get_listGastos();
+  CalcularTotales(monto: number) {
+    this.montoPresupuesto = monto;
     this.listaGastos.forEach(element => { this.totalGastos += element.monto; });
     this.Balance = this.montoPresupuesto - this.totalGastos;
+  }
+
+  cargarGasto(id: String) {
+
+    this.mostrarMantenimiento(false);
+
+    if (id !== '') {
+      this.gastoService.get_listGastos(id).subscribe((gastos) => {
+        this.gastoEdit = gastos.filter(x => x._id == id)[0];
+        this.mostrarMantenimiento(true);
+      });
+    }
+  }
+
+  borrarGasto(id: string) {
+    debugger;
+
+    this.mostrarMantenimiento(false);
+
+    if (id !== '') {
+      this.gastoService.delete_Gasto(id).subscribe((gastos) => {
+        debugger;
+        this.get_listGastos();
+      });
+    }
   }
 }

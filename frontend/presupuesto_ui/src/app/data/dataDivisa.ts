@@ -1,4 +1,4 @@
-import { Divisa } from "./interfaces/divisa";
+import { Divisa } from "../interfaces/divisa";
 
 export let listaDivisas: Divisa[] = [
     {
