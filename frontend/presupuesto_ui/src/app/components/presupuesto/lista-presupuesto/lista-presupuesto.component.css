@@ -1,0 +1,8 @@
+html,
+body {
+    width: 50%;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}

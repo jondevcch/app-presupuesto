@@ -1,0 +1,33 @@
+<p>
+    <mat-toolbar>
+        <h3 [ngStyle]="{ 'color': '#69f0ae'}">Mantenimiento de gastos</h3>
+    </mat-toolbar>
+</p>
+<div>
+    <form class="form-container" (ngSubmit)="mantenimiento(); 
+    gastoForm.resetForm()" #gastoForm="ngForm" [ngStyle]="{ 'margin-left': '11px' }">
+        <mat-form-field appearance="fill">
+            <mat-label>Descripción del gasto</mat-label>
+            <input matInput ngModel #Nombre="ngModel" name="nombre" [ngModel]="gasto.nombre" placeholder="Descripción del gasto" required />
+            <mat-error *ngIf="!Nombre.valid && Nombre.touched">
+                El nombre es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Monto gasto</mat-label>
+            <input matInput ngModel #Monto="ngModel" name="monto" [ngModel]="gasto.monto" placeholder="Monto del gasto" required />
+            <mat-error *ngIf="!Monto.valid && Monto.touched">
+                El monto es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <button #submitButton matInput mat-flat-button [ngStyle]="{
+        'margin-top': '-18px',
+        'margin-left': '10px',
+        padding: '28px'
+        }" color="accent" type="submit">
+        {{tituloBotones}}
+    </button>
+    </form>
+</div>

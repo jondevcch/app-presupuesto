@@ -1,0 +1,58 @@
+<p>
+    <mat-toolbar>
+        <h3 [ngStyle]="{ 'color': '#69f0ae'}">Mantenimiento de presupuesto</h3>
+    </mat-toolbar>
+</p>
+<div>
+    <form class="form-container" (ngSubmit)="mantenimiento(); 
+    presupuestoForm.resetForm()" #presupuestoForm="ngForm" [ngStyle]="{ 'margin-left': '11px' }">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre presupuesto</mat-label>
+            <input matInput ngModel #Nombre="ngModel" name="nombre" [ngModel]="presupuesto.nombre" placeholder="Nombre del presupuesto" required />
+            <mat-error *ngIf="!Nombre.valid && Nombre.touched">
+                El nombre es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Monto presupuesto</mat-label>
+            <input type="number" matInput ngModel #Monto="ngModel" name="monto" [ngModel]="presupuesto.monto" placeholder="Monto del presupuesto" required />
+            <mat-error *ngIf="!Monto.valid && Monto.touched">
+                El monto es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Divisa</mat-label>
+            <mat-select [(ngModel)]="presupuesto.divisa" name="divisa">
+                <mat-option *ngFor="let divisa of listadoDivisas" [value]="divisa.idDivisa">
+                    {{divisa.nombreDivisa}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categoría</mat-label>
+            <mat-select [(ngModel)]="presupuesto.categoria" name="categoria">
+                <mat-option *ngFor="let categoria of listadoCategorias" [value]="categoria.idCategoria">
+                    {{categoria.nombreCategoria}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button #submitButton matInput mat-flat-button [ngStyle]="{
+        'margin-top': '-18px',
+        'margin-left': '10px',
+        padding: '28px'
+        }" color="accent" type="submit">
+            {{tituloBotones}}
+        </button> &nbsp;
+        <button #submitButton matInput mat-flat-button (click)="redirect_presupuesto()" [ngStyle]="{
+        'margin-top': '-18px',
+        'margin-left': '10px',
+        padding: '28px'
+        }" color="warn" type="button">
+            Cancelar
+        </button>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+<p>
+    <mat-toolbar>
+        <span>Panel de presupuestos</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
+            <mat-icon color="accent">add_circle_outline</mat-icon>
+        </button>
+    </mat-toolbar>
+</p>
+
+<div class="mat-elevation-z8" *ngIf="editionMode" [ngStyle]="{ 'text-align': 'center' }">
+    <app-mant-presupuesto (mostrarMantenimiento)="mostrarMantenimiento($event)" (cargarPresupuestos)="get_listPresupuestos()" [presupuestoEdit]="presupuestoEdit">
+    </app-mant-presupuesto>
+</div>
+
+<div class="mat-elevation-z8">
+    <p>
+        <mat-toolbar>
+            <h3 [ngStyle]="{ color: '#69f0ae' }">Listado de presupuestos</h3>
+        </mat-toolbar>
+    </p>
+    <!-- Contacts table -->
+    <table mat-table [dataSource]="listaPresupuesto" [ngStyle]="{ 'margin-top': '30px' }">
+        <!-- FirstName column -->
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef class="text-color-columns ">Presupuesto Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                {{ presupuesto.nombre | titlecase }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="divisa">
+            <mat-header-cell *matHeaderCellDef class="text-color-columns ">Divisa</mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                {{ presupuesto.divisa }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef class="text-color-columns ">Monto Presupuesto</mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                {{ presupuesto.monto | currency: presupuesto.divisa :'symbol'}}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let presupuesto">
+                <button mat-flat-button color="accent" (click)="cargarPresupuesto(presupuesto._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn" (click)="deletePresupuesto(presupuesto._id)"><mat-icon>delete</mat-icon>Borrar</button>&nbsp;
+                <button mat-flat-button color="link" (click)="visualizarGastos(presupuesto)"><mat-icon>list</mat-icon>Gastos</button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Table settings -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>

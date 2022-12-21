@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    height: 100%;
+    background-color: white;
+}
+
+.labelDescription {
+    font-size: large;
+}
+
+p {
+    font-weight: 600;
+    line-height: 1;
+    padding-bottom: .5em;
+    margin: 0 0 0.142857143em;
+    border-bottom: 2px solid #753BBD;
+    transition: color .45s ease, border .45s ease;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}

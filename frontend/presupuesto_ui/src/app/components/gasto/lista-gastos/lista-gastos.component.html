@@ -1,0 +1,68 @@
+<p>
+    <mat-toolbar>
+        <span>Panel de gastos</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
+            <mat-icon color="accent">add_circle_outline</mat-icon>
+        </button>
+    </mat-toolbar>
+</p>
+
+<div class="mat-elevation-z8" *ngIf="editionMode">
+    <app-mant-gasto (cargarGastos)="get_listGastos()" [idPresupuesto]="presupuesto._id" [gastoEdit]="gastoEdit"></app-mant-gasto>
+</div>
+
+<p>
+    <mat-toolbar>
+        <h1 [ngStyle]="{ color: '#199d54' }">Listado de Gastos</h1>
+    </mat-toolbar>
+</p>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" [ngStyle]="{ 'margin-top': '30px' }">
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef> Descripción del gasto</mat-header-cell>
+            <mat-cell *matCellDef="let gas">
+                {{ gas.nombre | titlecase }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
+            <mat-cell *matCellDef="let gas">
+                {{ gas.monto | currency: presupuesto.divisa :'symbol'}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- Buttons column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let gas">
+                <button mat-flat-button color="accent" (click)="cargarGasto(gas._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn" (click)="borrarGasto(gas._id)"><mat-icon>delete</mat-icon>Borrar</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="card-wrapper" style="text-align: center;">
+    <mat-card class="example-card" style="text-align: center;">
+        <mat-card-content>
+            <mat-grid-list class="labelDescription" cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency: presupuesto.divisa :'symbol'}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency: presupuesto.divisa :'symbol'}}</p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
+                    <p class="labelDescription">Balance:&nbsp;{{Balance | currency: presupuesto.divisa :'symbol'}}</p>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
+</div>

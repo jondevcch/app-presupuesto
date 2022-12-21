@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+/* for sidenav to take a whole page */
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.text-color-columns {
+    color: #199d54;
+}
+
+.button-row {
+    display: table-cell;
+    max-width: 600px;
+}
+
+.form-container mat-form-field+mat-form-field {
+    margin-left: 8px;
+}
+
+.wide-input {
+    width: 20%;
+}
+
+::ng-deep .custom-style-notificacion{
+    background-color: #199d54;
+    color: white;
+}
