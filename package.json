@@ -1,0 +1,20 @@
+{
+    "name": "proyecto-presupuesto",
+    "description": "Mini proyecto de presupuesto para el curso de Angular",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "build": "ng build --prod"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jondevcch/app-presupuesto.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jondevcch/app-presupuesto/issues"
+    },
+    "homepage": "https://github.com/jondevcch/app-presupuesto#readme"
+}
