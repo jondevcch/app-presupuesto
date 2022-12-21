@@ -65,11 +65,4 @@ export class MantGastoComponent implements OnInit {
       horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
     });
   }
-
-  // get_gasto(id: string){
-  //   this.gastoServices.get_listGastos(id).subscribe((presupuesto)=> {
-  //     this.presupuestoEdit = presupuesto;
-  //  });
-  // }
-
 }

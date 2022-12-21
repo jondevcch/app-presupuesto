@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GastoService } from 'src/app/services/gasto-service.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-lista-presupuesto',
@@ -28,7 +29,7 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
 
   @ViewChild('presupuestoForm') presupuestoForm!: NgForm;
 
-  constructor(private presupuestoServices: PresupuestoService, private gastosServices: GastoService, private route: Router) { }
+  constructor(private presupuestoServices: PresupuestoService, private gastosServices: GastoService, private route: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.get_listPresupuestos();
@@ -45,10 +46,10 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
     });
   }
 
-  
   deletePresupuesto(id: string) {
     this.presupuestoServices.delete_Presupuesto(id).subscribe((presupuesto)=> {
       this.get_listPresupuestos();
+      this.showSnackbarTopPosition('El presupuesto se ha borrado exitosamente', '')
    });
   }
 
@@ -70,5 +71,14 @@ export class ListaPresupuestoComponent implements AfterViewInit, OnInit {
           this.mostrarMantenimiento(true);
        });
     }
+  }
+
+  showSnackbarTopPosition(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      panelClass: ["custom-style-notificacion"],
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
   }
 }

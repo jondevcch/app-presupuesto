@@ -48,12 +48,14 @@ export class MantPresupuestoComponent implements OnInit {
   add_presupuesto() {
     this.presupuestoServices.add_Presupuesto(this.presupuestoForm.value).subscribe((pre) => {
       this.cargarPresupuestos.next('');
+      this.showSnackbarTopPosition('El presupuesto se ha agregado exitosamente', '')
     });
   }
 
   update_presupuesto() {
     this.presupuestoServices.update_Presupuesto(this.presupuestoEdit._id, this.presupuestoForm.value).subscribe((presupuesto) => {
       this.cargarPresupuestos.next('');
+      this.showSnackbarTopPosition('El presupuesto se ha modificado exitosamente', '')
     });
   }
 

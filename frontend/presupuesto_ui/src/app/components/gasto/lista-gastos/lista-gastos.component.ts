@@ -49,6 +49,7 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
 
   get_listGastos() {
 
+    debugger;
     this.gastoService.get_listGastos(this.presupuesto._id).subscribe((gastos) => {
       this.listaGastos = gastos;
       this.LoadTable();
