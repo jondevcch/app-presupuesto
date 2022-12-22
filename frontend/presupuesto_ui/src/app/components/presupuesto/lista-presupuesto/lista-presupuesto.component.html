@@ -1,9 +1,3 @@
-<p>
-    <mat-toolbar>
-        <span>Panel de presupuestos</span>
-    </mat-toolbar>
-</p>
-
 <div class="mat-elevation-z8" *ngIf="editionMode" [ngStyle]="{ 'text-align': 'center' }">
     <app-mant-presupuesto (mostrarMantenimiento)="mostrarMantenimiento($event)" (cargarPresupuestos)="get_listPresupuestos()" [presupuestoEdit]="presupuestoEdit">
     </app-mant-presupuesto>

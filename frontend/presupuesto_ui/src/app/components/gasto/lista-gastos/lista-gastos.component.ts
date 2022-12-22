@@ -35,13 +35,14 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
   @ViewChild('paginator') paginator!: MatPaginator
   @ViewChild('editGastoForm') editForm!: NgForm;
 
-  constructor(private gastoService: GastoService, private presupuestoServices: PresupuestoService, 
-    private snackBar: MatSnackBar, private Activatedroute: ActivatedRoute) { 
+  constructor(private gastoService: GastoService, private presupuestoServices: PresupuestoService,
+    private snackBar: MatSnackBar, private Activatedroute: ActivatedRoute, private router: Router) {
     this.presupuestoID = Activatedroute.snapshot.params['id'];
+
   }
 
   ngOnInit(): void {
-    this.presupuestoServices.get_Presupuesto(this.presupuestoID).subscribe((pre)=>{
+    this.presupuestoServices.get_Presupuesto(this.presupuestoID).subscribe((pre) => {
       this.presupuesto = pre;
       this.get_listGastos();
     });
@@ -104,5 +105,9 @@ export class ListaGastosComponent implements AfterViewInit, OnInit {
       verticalPosition: "top", // Allowed values are  'top' | 'bottom'
       horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
     });
+  }
+
+  regresarIndex() {
+    this.router.navigate(['presupuestos']);
   }
 }
