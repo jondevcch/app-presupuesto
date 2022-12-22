@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/structure/header/header.component';
 import { FooterComponent } from './components/structure/footer/footer.component';
 import { ListaPresupuestoComponent } from './components/presupuesto/lista-presupuesto/lista-presupuesto.component';
 import { MantPresupuestoComponent } from './components/presupuesto/mant-presupuesto/mant-presupuesto.component';
-import { SideNavListComponent } from './components/structure/header/sideNavList/sideNavList.component';
 import { MaterialModule } from './material.module';
 import { RouterModule, Routes } from "@angular/router";
 
@@ -28,12 +28,12 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    SideNavListComponent,
     FooterComponent,
     ListaPresupuestoComponent,
     MantPresupuestoComponent,
     ListaGastosComponent,
     MantGastoComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

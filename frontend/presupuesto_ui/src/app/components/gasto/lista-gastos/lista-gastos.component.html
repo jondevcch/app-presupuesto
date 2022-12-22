@@ -1,20 +1,25 @@
-<p>
-    <mat-toolbar>
-        <span>Panel de gastos</span>
-    </mat-toolbar>
-</p>
-
-<div class="mat-elevation-z8" *ngIf="editionMode">
-    <app-mant-gasto (cargarGastos)="get_listGastos()" [idPresupuesto]="presupuesto._id" [gastoEdit]="gastoEdit"></app-mant-gasto>
+ 
+<div class="mat-elevation-z8" *ngIf="editionMode" [ngStyle]="{ 'text-align': 'center' }">
+    <app-mant-gasto (cargarGastos)="get_listGastos()" (mostrarMantenimiento)="mostrarMantenimiento()"
+        [idPresupuesto]="presupuesto._id" [gastoEdit]="gastoEdit"></app-mant-gasto>
 </div>
 
 <p>
     <mat-toolbar>
-        <h1 [ngStyle]="{ color: '#199d54' }">Listado de Gastos para {{presupuesto.nombre}}</h1>
+        <p>
+            <mat-toolbar>
+                <h3 [ngStyle]="{ 'color': '#69f0ae'}">Listado de Gastos para {{presupuesto.nombre}}</h3>
+            </mat-toolbar>
+        </p>
         <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="mostrarMantenimiento(true)">
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            (click)="mostrarMantenimiento(true)">
             <mat-icon color="accent">add_circle_outline</mat-icon>
         </button>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+                (click)="regresarIndex()">
+                <mat-icon color="warm">keyboard_backspace</mat-icon>
+            </button>
     </mat-toolbar>
 </p>
 
@@ -38,8 +43,10 @@
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let gas">
-                <button mat-flat-button color="accent" (click)="cargarGasto(gas._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
-                <button mat-flat-button color="warn" (click)="borrarGasto(gas._id)"><mat-icon>delete</mat-icon>Borrar</button>
+                <button mat-flat-button color="accent"
+                    (click)="cargarGasto(gas._id)"><mat-icon>edit</mat-icon>Editar</button> &nbsp;
+                <button mat-flat-button color="warn"
+                    (click)="borrarGasto(gas._id)"><mat-icon>delete</mat-icon>Borrar</button>
             </mat-cell>
         </ng-container>
 
@@ -54,10 +61,12 @@
         <mat-card-content>
             <mat-grid-list class="labelDescription" cols="3" rowHeight="100px">
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
-                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency: presupuesto.divisa :'symbol'}}</p>
+                    <p class="labelDescription">Presupuesto:&nbsp; {{montoPresupuesto | currency: presupuesto.divisa
+                        :'symbol'}}</p>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
-                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency: presupuesto.divisa :'symbol'}}</p>
+                    <p class="labelDescription">Total de gastos: &nbsp;{{totalGastos | currency: presupuesto.divisa
+                        :'symbol'}}</p>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'white'">
                     <p class="labelDescription">Balance:&nbsp;{{Balance | currency: presupuesto.divisa :'symbol'}}</p>

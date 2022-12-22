@@ -19,12 +19,13 @@ export class MantGastoComponent implements OnInit {
 
   @ViewChild('gastoForm') gastoForm!: NgForm;
   @Output() cargarGastos = new EventEmitter();
+  @Output() mostrarMantenimiento = new EventEmitter();
   @Input() gastoEdit!: Gasto;
 
   @Input() idPresupuesto!: string;
 
   constructor(private gastoServices: GastoService, private snackBar: MatSnackBar) {
-    
+
   }
 
   ngOnInit(): void {
@@ -43,7 +44,7 @@ export class MantGastoComponent implements OnInit {
     this.gasto.idPresupuesto = this.idPresupuesto;
     this.gastoServices.add_Gasto(this.gasto).subscribe(() => {
       this.cargarGastos.next('');
-        this.showSnackbarTopPosition('El gasto se ha agregado exitosamente', '')
+      this.showSnackbarTopPosition('El gasto se ha agregado exitosamente', '')
     });
   }
 
@@ -58,13 +59,25 @@ export class MantGastoComponent implements OnInit {
     });
   }
 
-  
-  showSnackbarTopPosition(message:string, action?:string) {
+  showSnackbarTopPosition(message: string, action?: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
       panelClass: ["custom-style-notificacion"],
       verticalPosition: "top", // Allowed values are  'top' | 'bottom'
       horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
     });
+  }
+
+  inicializarObjeto() : Gasto {
+    this.gasto._id = '';
+    this.gasto.nombre = '';
+    this.gasto.monto = 0;
+
+    return this.gasto;
+  }
+
+  redirect_gasto() {
+    this.gasto = this.inicializarObjeto();
+    this.mostrarMantenimiento.next(false);
   }
 }

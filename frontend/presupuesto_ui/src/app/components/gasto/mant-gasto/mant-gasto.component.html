@@ -8,7 +8,8 @@
     gastoForm.resetForm()" #gastoForm="ngForm" [ngStyle]="{ 'margin-left': '11px' }">
         <mat-form-field appearance="fill">
             <mat-label>Descripción del gasto</mat-label>
-            <input matInput ngModel #Nombre="ngModel" name="nombre" [ngModel]="gasto.nombre" placeholder="Descripción del gasto" required />
+            <input matInput ngModel #Nombre="ngModel" name="nombre" [ngModel]="gasto.nombre"
+                placeholder="Descripción del gasto" required />
             <mat-error *ngIf="!Nombre.valid && Nombre.touched">
                 El nombre es requerido
             </mat-error>
@@ -16,7 +17,8 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Monto gasto</mat-label>
-            <input matInput ngModel #Monto="ngModel" name="monto" [ngModel]="gasto.monto" placeholder="Monto del gasto" required />
+            <input matInput ngModel #Monto="ngModel" name="monto" [ngModel]="gasto.monto" placeholder="Monto del gasto"
+                required />
             <mat-error *ngIf="!Monto.valid && Monto.touched">
                 El monto es requerido
             </mat-error>
@@ -27,7 +29,14 @@
         'margin-left': '10px',
         padding: '28px'
         }" color="accent" type="submit">
-        {{tituloBotones}}
-    </button>
+            {{tituloBotones}}
+        </button>
+        <button #submitButton matInput mat-flat-button (click)="redirect_gasto()" [ngStyle]="{
+        'margin-top': '-18px',
+        'margin-left': '10px',
+        padding: '28px'
+        }" color="warn" type="button">
+            Cancelar
+        </button>
     </form>
 </div>
